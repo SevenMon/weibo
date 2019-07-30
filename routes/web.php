@@ -30,3 +30,6 @@ Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy')
 Route::get('login','SessionsController@create')->name('login');
 Route::post('login','SessionsController@store')->name('login');
 Route::delete('logout','SessionsController@destroy')->name('logout');
+
+//邮箱确认注册
+Route::get('confirm_email','UsersController@confirmEmail')->name('confirm_email');
