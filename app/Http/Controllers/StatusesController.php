@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Status;
 use Illuminate\Http\Request;
+use Auth;
 
 class StatusesController extends Controller
 {
@@ -13,14 +14,17 @@ class StatusesController extends Controller
         $this->middleware('auth');
     }
 
-    public function create(Request $request){
+    public function store(Request $request){
         $this->validate($request,array(
             'content' => 'required|max:140'
         ));
 
-        Auth::user()->statuses->create([
-            'content' => $request->content
+
+        Auth::user()->statuses()->create([
+            'content' => $request['content'],
         ]);
+        session()->flash('success','发布成功！');
+        return redirect()->back();
 
     }
 
